@@ -50,7 +50,7 @@ class Constellation extends AppActiveRecord
     public function rules(): array
     {
         return [
-            [['coordinates', 'title', 'en_title', 'description', 'en_description', 'image', 'status', 'type'], 'required'],
+            [['coordinates', 'title', 'en_title', 'description', 'en_description', 'image'], 'required'],
             [['status', 'type'], 'integer'],
             [['coordinates', 'title', 'en_title', 'description', 'en_description', 'image', 'user_photo', 'token_id'], 'string', 'max' => 255]
         ];

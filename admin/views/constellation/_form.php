@@ -32,13 +32,14 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'user_photo')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class) ?>
 
-    <?= $form->field($model, 'status')->widget(
-        Select2::class,
-        ['data' => \common\enums\ModerationStatus::indexedDescriptions(), 'hideSearch' => true]) ?>
-
-    <?= $form->field($model, 'type')->widget(
-        Select2::class,
-        ['data' => \common\enums\Type::indexedDescriptions(), 'hideSearch' => true]) ?>
+<!--    --><?php //if (!$isCreate) {
+//        $form->field($model, 'status')->widget(
+//            Select2::class,
+//                ['data' => \common\enums\ModerationStatus::indexedDescriptions(), 'hideSearch' => true]);
+//        $form->field($model, 'type')->widget(
+//            Select2::class,
+//                ['data' => \common\enums\Type::indexedDescriptions(), 'hideSearch' => true]);
+//    }?>
 
     <div class="form-group">
         <?php if ($isCreate) {

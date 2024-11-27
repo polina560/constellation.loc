@@ -14,7 +14,7 @@ class m241126_125449_create_constellation_table extends Migration
     {
         $this->createTable('{{%constellation}}', [
             'id' => $this->primaryKey()->notNull(),
-            'coordinates' => $this->string()->notNull(),
+            'coordinates' => $this->text()->notNull(),
             'title' => $this->string()->notNull(),
             'en_title' => $this->string()->notNull(),
             'description' => $this->string()->notNull(),
