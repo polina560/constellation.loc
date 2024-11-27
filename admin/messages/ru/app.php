@@ -171,4 +171,17 @@ return [
     'Download Link' => 'Ссылка на скачивание',
     'Count' => 'Кол-во',
     'Date' => 'Дата',
+
+    'Image' => 'Изображение',
+    'Update Image: ' => 'Изменить изображение',
+    'Create Image' => 'Добавить изображение: ',
+    'Constellation' => 'Созвездие',
+    'Constellations' => 'Созвездия',
+    'Create Constellation' => 'Добавить созвездие',
+    'Update Constellation: ' => 'Изменить созвездие: ',
+    'Coordinates' => 'Координаты',
+    'English Title' => 'Название на английском',
+    'English Description' => 'Описание на английском',
+    'User Photo' => 'Фото пользователя',
+    'Token ID' => 'Токен ID'
 ];

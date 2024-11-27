@@ -18,6 +18,7 @@ use Yii;
 #[Schema(properties: [
     new Property(property: 'key', type: 'string'),
     new Property(property: 'value', type: 'string'),
+    new Property(property: 'en_value', type: 'string'),
 ])]
 class Text extends AppActiveRecord
 {
@@ -37,6 +38,11 @@ class Text extends AppActiveRecord
         $val = self::find()->select(['value'])->where(['key' => $key])->asArray()->one();
         return $val['value'] ?? null;
     }
+    public static function getEnValue(string $key): ?string
+    {
+        $val = self::find()->select(['en_value'])->where(['key' => $key])->asArray()->one();
+        return $val['en_value'] ?? null;
+    }
 
     /**
      * {@inheritdoc}
@@ -45,7 +51,7 @@ class Text extends AppActiveRecord
     {
         return [
             [['key', 'value'], 'required'],
-            ['value', 'string'],
+            [['value', 'en_value'], 'string'],
             ['key', 'string', 'max' => 255],
         ];
     }
@@ -59,6 +65,7 @@ class Text extends AppActiveRecord
             'id' => Yii::t('app', 'ID'),
             'key' => Yii::t('app', 'Key'),
             'value' => Yii::t('app', 'Value'),
+            'en_value' => Yii::t('app', 'English Value'),
         ];
     }
 
@@ -67,6 +74,6 @@ class Text extends AppActiveRecord
      */
     final public function fields(): array
     {
-        return ['key', 'value'];
+        return ['key', 'value', 'en_value'];
     }
 }

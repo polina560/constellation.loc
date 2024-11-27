@@ -7,23 +7,17 @@ use yii\helpers\Url;
 
 /**
  * @var $this     yii\web\View
- * @var $model    common\models\Text
+ * @var $model    common\models\Image
  * @var $form     AppActiveForm
  * @var $isCreate bool
  */
 ?>
 
-<div class="text-form">
+<div class="image-form">
 
     <?php $form = AppActiveForm::begin() ?>
 
-    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'value')->widget(\admin\widgets\ckeditor\EditorClassic::class)
-//        ->textarea(['rows' => count(explode(PHP_EOL, (string)$model->value))]) ?>
-
-    <?= $form->field($model, 'en_value')->widget(\admin\widgets\ckeditor\EditorClassic::class)
-//        ->textarea(['rows' => count(explode(PHP_EOL, (string)$model->value))]) ?>
+    <?= $form->field($model, 'image')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class) ?>
 
     <div class="form-group">
         <?php if ($isCreate) {

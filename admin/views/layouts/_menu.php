@@ -5,7 +5,7 @@ use admin\models\UserAdminSearch;
 use admin\modules\modelExportImport\models\ModelImportLogSearch;
 use admin\modules\rbac\components\RbacNav;
 use common\components\helpers\UserUrl;
-use common\models\{ExportListSearch, TextSearch};
+use common\models\{ConstellationSearch, ExportListSearch, ImageSearch, TextSearch};
 use common\modules\log\Log;
 use common\modules\mail\models\{MailingLogSearch, MailingSearch, MailTemplateSearch};
 use common\modules\notification\widgets\NotificationBell;
@@ -39,21 +39,40 @@ if (!Yii::$app->user->isGuest) {
     /** @var Log $logModule */
     $logModule = Yii::$app->getModule('log');
     $menuItems = [
-        ['label' => Icon::show('chart-bar') . 'Статистика', 'url' => ['/statistic/index']],
+        [
+            'label' => Yii::t('app', 'Constellations'),
+            'url' => UserUrl::setFilters(ConstellationSearch::class, ['/constellation/index'])
+        ],
+
+//        ['label' => Icon::show('chart-bar') . 'Статистика', 'url' => ['/statistic/index']],
+        [
+            'label' => Icon::show('file-alt') . 'Контент',
+            'items' => [
+                 [
+                    'label' => Icon::show('align-justify') . 'Тексты',
+                    'url' => UserUrl::setFilters(TextSearch::class, ['/text/index'])
+                 ],
+                [
+                    'label' => Icon::show('image') . Yii::t('app', 'Images'),
+                    'url' => UserUrl::setFilters(ImageSearch::class, ['/image/index'])
+                ],
+
+//                [
+//                    'label' => Icon::show('users') . 'Пользователи',
+//                    'url' => UserUrl::setFilters(UserSearch::class, ['/user/user/index']),
+//                    'visible' => (bool)Yii::$app->getModule('user')
+//                ],
+//                ['label' => Icon::show('wrench') . 'Публичные параметры', 'url' => ['/param/index']],
+//                [
+//                    'label' => Icon::show('align-justify') . 'Тексты',
+//                    'url' => UserUrl::setFilters(TextSearch::class, ['/text/index'])
+//                ]
+            ]
+        ],
         [
             'label' => Icon::show('users') . 'Пользователи',
             'url' => UserUrl::setFilters(UserSearch::class, ['/user/user/index']),
             'visible' => (bool)Yii::$app->getModule('user')
-        ],
-        [
-            'label' => Icon::show('file-alt') . 'Контент',
-            'items' => [
-                ['label' => Icon::show('wrench') . 'Публичные параметры', 'url' => ['/param/index']],
-                [
-                    'label' => Icon::show('align-justify') . 'Тексты',
-                    'url' => UserUrl::setFilters(TextSearch::class, ['/text/index'])
-                ]
-            ]
         ],
         [
             'label' => Icon::show('cogs') . 'Управление',

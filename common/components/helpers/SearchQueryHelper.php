@@ -144,13 +144,13 @@ class SearchQueryHelper
             $from = substr($search, 0, $div_pos);
             preg_match($regExp, $from, $matchesFrom);
             $from = strtotime($from);
-            if (!$matchesFrom[2]) {
+            if (!array_key_exists(2, $matchesFrom)) {
                 $from = strtotime('today', $from);
             }
             $to = substr($search, $div_pos + 3);
             preg_match($regExp, $to, $matchesTo);
             $to = strtotime($to);
-            if (!$matchesTo[2]) {
+            if (!array_key_exists(2, $matchesTo)) {
                 $to = strtotime('tomorrow', $to) - 1;
             }
 
