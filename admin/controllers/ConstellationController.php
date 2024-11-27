@@ -84,8 +84,8 @@ final class ConstellationController extends AdminController
     {
         $model = new Constellation();
 
-        $model->status = 0;
-        $model->type = 10;
+        $model->status = ModerationStatus::UnderReview->value;
+        $model->type = Type::Prepared->value;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', "Элемент №$model->id создан успешно");
             return match ($redirect) {

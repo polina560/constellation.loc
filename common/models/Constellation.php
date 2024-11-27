@@ -94,9 +94,11 @@ class Constellation extends AppActiveRecord
 
     public function beforeSave($insert): bool
     {
-        $token = Yii::$app->security->generateRandomString(15);;
-        $this->token_id = $token;
+        if(empty($this->token_id)){
+            $token = Yii::$app->security->generateRandomString(15);;
+            $this->token_id = $token;
 
+        }
         return parent::beforeSave($insert);
     }
 }

@@ -3,6 +3,8 @@
 namespace common\models;
 
 use common\models\AppActiveRecord;
+use OpenApi\Attributes\Property;
+use OpenApi\Attributes\Schema;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -12,6 +14,10 @@ use yii\helpers\ArrayHelper;
  * @property int    $id
  * @property string $image
  */
+
+#[Schema(properties: [
+    new Property(property: 'image', type: 'string'),
+])]
 class Image extends AppActiveRecord
 {
     /**
@@ -41,6 +47,13 @@ class Image extends AppActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'image' => Yii::t('app', 'Image'),
+        ];
+    }
+
+    final public function fields(): array
+    {
+        return [
+            'image'  => fn() => Yii::$app->request->hostInfo . $this->image,
         ];
     }
 }

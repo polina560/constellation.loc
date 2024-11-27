@@ -4,6 +4,7 @@ namespace api\modules\v1\controllers;
 
 use api\behaviors\returnStatusBehavior\JsonSuccess;
 use api\behaviors\returnStatusBehavior\RequestFormData;
+use common\enums\ModerationStatus;
 use common\models\Constellation;
 use common\models\Setting;
 use OpenApi\Attributes\Get;
@@ -51,7 +52,7 @@ class ConstellationController extends AppController
             'query' => $query,
         ]);
         return $this->returnSuccess([
-            'constellation' => $provider,
+            'constellations' => $provider,
         ]);
 
 
@@ -76,10 +77,10 @@ class ConstellationController extends AppController
         $n = Setting::find()->where(['id' => 9])->one()->value;
         $i = Setting::find()->where(['id' => 10])->one()->value;
 
-        $query1 = Constellation::find()->andWhere(['status' => 10])
+        $query1 = Constellation::find()->andWhere(['status' => ModerationStatus::Approved->value])
             ->andWhere(['type' => 0])->orderBy(new Expression('rand()'))->limit($n);
 
-        $query2 = Constellation::find()->andWhere(['status' => 10])
+        $query2 = Constellation::find()->andWhere(['status' => ModerationStatus::Approved->value])
             ->andWhere(['type' => 10])->orderBy(new Expression('rand()'))->limit($i);
 
         $query1->union($query2);
@@ -126,13 +127,14 @@ class ConstellationController extends AppController
 
         $query = Constellation::find()->andWhere(['token_id' => $token_id]);
 
-        $provider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-        return $this->returnSuccess([
-            'teas' => $provider,
+        if(empty($token_id) || empty($query))
+            return $this->returnError(['Поле token_id не заполнено или заполнено не корректно']);
 
-        ]);
+            return [
+                'success' => true,
+                'data' => $query->one(),
+            ];
+
 
     }
 
